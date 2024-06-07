@@ -32,11 +32,18 @@ function showReviewTotal(value: number, reviewer: string, isLoyalty : boolean) {
 //Calling the function to display
 showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser);
 
+//Object Paramaters: keys assigned types to ensure that the data that goes into the object matches the specialised object assignments.
+const you: {
+    firstName : string;
+    lastName: string;
+    isReturning: boolean;
+    age: number;
+} = {
 
-const you = {
-
-    userName: 'Bobby',
+    firstName: 'Bobby',
+    lastName: 'Brown'
     isReturning: true,
+    age: 35
 }
 
 function populateUser(isReturning : boolean, userName : string ) {
