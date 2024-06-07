@@ -28,7 +28,7 @@ const reviews = [
 //function to show total number of reviews and only accepts numbers
 
 function showReviewTotal(value: number) {
-  reviewTotalDisplay.innerHTML = "review total" + value.toString(); 
+  reviewTotalDisplay.innerHTML = "review total" + value.toString();
 }
 
 showReviewTotal(reviews.length);
