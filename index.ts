@@ -1,8 +1,8 @@
-const returningUserDisplay = document.querySelector("#returning-user");
-const userNameDisplay = document.querySelector("#user");
-const reviewTotalDisplay = document.querySelector("#reviews");
+import { showReviewTotal, populateUser } from './utils'
 let isOpen: boolean;
 
+
+//Reviews list
 const reviews: {
   name: string;
   stars: number;
@@ -29,21 +29,7 @@ const reviews: {
   },
 ];
 
-//function to show total number of reviews and only accepts numbers
 
-function showReviewTotal(value: number, reviewer: string, isLoyalty: boolean) {
-  const iconDisplay = isLoyalty ? "⭐" : "";
-  reviewTotalDisplay.innerHTML =
-    "review total" +
-    value.toString() +
-    "| last reviewed by " +
-    reviewer +
-    " " +
-    iconDisplay;
-}
-
-//Calling the function to display
-showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser);
 
 //Object Paramaters: keys assigned types to ensure that the data that goes into the object matches the specialised object assignments.
 const you: {
@@ -60,11 +46,23 @@ const you: {
   stayedAt: ["florida-home", "oman-flat", "tokyo-bungalow"],
 };
 
-function populateUser(isReturning: boolean, userName: string) {
-  if (isReturning) {
-    returningUserDisplay.innerHTML = "back";
-  }
-  userNameDisplay.innerHTML = userName;
-}
 
+//Properties
+const properties : {
+    image: string;
+    title: string;
+    price: number;
+    location: {
+        firstLine: string;
+        city: string;
+        code: number;
+        country: string;
+    };
+    contact: string;
+    isAvailable: boolean;
+}[]
+
+
+//Calling the function to display
+showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser);
 populateUser(you.isReturning, you.firstName);
