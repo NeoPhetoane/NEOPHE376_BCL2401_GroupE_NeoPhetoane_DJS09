@@ -1,23 +1,16 @@
 import { showReviewTotal, populateUser } from "./utils";
-import { Permissions, LoyaltyUser } from './enums'
-
+import { Permissions, LoyaltyUser } from "./enums";
 const propertyContainer = document.querySelector(".properties");
 const footer = document.querySelector(".footer");
 
-
-let isOpen: boolean;
+let isLoggedIn: boolean;
 
 //Reviews list
-const reviews: {
-  name: string;
-  stars: number;
-  loyaltyUser: LoyaltyUser;//using utils to decide what type of loyalty user the reviewers are.
-  date: string;
-}[] = [
+const reviews: any[] = [
   {
     name: "Sheia",
     stars: 5,
-    loyaltyUser:  LoyaltyUser.GOLD_USER,
+    loyaltyUser: LoyaltyUser.GOLD_USER,
     date: "01-04-2021",
   },
   {
@@ -35,20 +28,14 @@ const reviews: {
 ];
 
 //Object Paramaters: keys assigned types to ensure that the data that goes into the object matches the specialised object assignments.
-const you: {
-  firstName: string;
-  lastName: string;
-  isReturning: boolean;
-  age: number;
-  stayedAt: string[];
-} = {
+const you = {
   firstName: "Bobby",
   lastName: "Brown",
+  permissions: Permissions.ADMIN,
   isReturning: true,
   age: 35,
   stayedAt: ["florida-home", "oman-flat", "tokyo-bungalow"],
 };
-
 
 //Properties
 const properties: {
@@ -109,6 +96,24 @@ const properties: {
 showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser);
 populateUser(you.isReturning, you.firstName);
 
+//Function that
+let authorityStatus : any
+
+isLoggedIn = true
+
+function showDetails(authorityStatus: boolean | Permissions, element : HTMLDivElement, price: number) {
+   if (authorityStatus) {
+       const priceDisplay = document.createElement('div')
+       priceDisplay.innerHTML = price.toString() + '/night'
+       element.appendChild(priceDisplay)
+   }
+}
+
+
+
+
+
+
 //Displaying the properties on the page inside the div
 for (let i = 0; i < properties.length; i++) {
   const card = document.createElement("div");
@@ -118,6 +123,7 @@ for (let i = 0; i < properties.length; i++) {
   image.setAttribute("src", properties[i].image);
   card.appendChild(image);
   propertyContainer.appendChild(card);
+  showDetails(you.permissions, card, properties[i].price)
 }
 
 //Adding the current time, and the current temperatur of the location to the footer
