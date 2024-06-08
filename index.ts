@@ -1,3 +1,5 @@
+const propertyContainer = document.querySelector('.properties')
+
 import { showReviewTotal, populateUser } from "./utils";
 let isOpen: boolean;
 
@@ -57,47 +59,59 @@ const properties: {
   contact: string;
   isAvailable: boolean;
 }[] = [
-  {
-    image: "",
-    title: "Red Container",
-    price: 6000,
-    location: {
-      firstLine: "23 Lenatong",
-      city: "Rustenburg",
-      code: 2999,
-      country: "South Africa",
+    {
+        image: 'images/colombia-property.jpg',
+        title: 'Colombian Shack',
+        price: 45,
+        location: {
+            firstLine: 'shack 37',
+            city: 'Bogota',
+            code: 45632,
+            country: 'Colombia'
+        },
+        contact: 'marywinkle@gmail.com',
+        isAvailable: true  
     },
-    contact: "lebogang@gmail.com",
-    isAvailable: true,
-  },
-  {
-    image: "",
-    title: "Car wash",
-    price: 50000,
-    location: {
-      firstLine: "no 27",
-      city: "London",
-      code: 343903,
-      country: "England",
+    {
+        image: 'images/poland-property.jpg',
+        title: 'Polish Cottage',
+        price: 34,
+        location: {
+            firstLine: 'no 23',
+            city: 'Gdansk',
+            code: 343903,
+            country: 'Poland'
+        },
+        contact: 'garydavis@hotmail.com',
+        isAvailable: false 
     },
-    contact: "garydavis@hotmail.com",
-    isAvailable: false,
-  },
-  {
-    image: "",
-    title: "London Flat",
-    price: 23,
-    location: {
-      firstLine: "flat 15",
-      city: "London",
-      code: 35433,
-      country: "United Kingdom",
-    },
-    contact: "andyluger@aol.com",
-    isAvailable: true,
-  },
+    {
+        image: 'images/london-property.jpg',
+        title: 'London Flat',
+        price: 23,
+        location: {
+            firstLine: 'flat 15',
+            city: 'London',
+            code: 35433,
+            country: 'United Kingdom',
+        },
+        contact: 'andyluger@aol.com',
+        isAvailable: true
+    }
 ];
 
 //Calling the function to display
 showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser);
 populateUser(you.isReturning, you.firstName);
+
+
+//Displaying the properties on the page inside the div
+for (let i = 0; i < properties.length; i++) {
+    const card = document.createElement('div')
+    card.classList.add('card')
+    card.innerHTML = properties[i].title
+    const image = document.createElement('img')
+    image.setAttribute('src', properties[i].image)
+    card.appendChild(image)
+    propertyContainer.appendChild(card)
+}
