@@ -52,20 +52,24 @@ const you = {
   stayedAt: ["florida-home", "oman-flat", "tokyo-bungalow"],
 };
 
-//Properties
-const properties: {
+//Interface Property
+interface Property {
   image: string;
   title: string;
-  price: number;
+  price: Price;
   location: {
     firstLine: string;
     city: string;
-    code: number;
+    code: number | string;
     country: Country;
   };
   contact: [number, string];
   isAvailable: boolean;
-}[] = [
+}
+
+//Properties
+
+const properties: Property[] = [ //Interface
   {
     image: "images/colombia-property.jpg",
     title: "Colombian Shack",
@@ -82,7 +86,7 @@ const properties: {
   {
     image: "images/poland-property.jpg",
     title: "Polish Cottage",
-    price: 34,
+    price: 30,
     location: {
       firstLine: "no 23",
       city: "Gdansk",
@@ -95,7 +99,7 @@ const properties: {
   {
     image: "images/london-property.jpg",
     title: "London Flat",
-    price: 23,
+    price: 25,
     location: {
       firstLine: "flat 15",
       city: "London",
@@ -155,16 +159,31 @@ function addReviews(array: Review[]): void {
 
 button.addEventListener("click", () => addReviews(reviews));
 
-
 //Class practice
 
 class MainProperty {
-    src: string
-    title: string
-    reviews: Review[]
-    constructor(src, title, reviews) {
-        this.src = src
-        this.title = title
-        this.reviews = reviews
-    }
+  src: string;
+  title: string;
+  reviews: Review[];
+  constructor(src, title, reviews) {
+    this.src = src;
+    this.title = title;
+    this.reviews = reviews;
+  }
 }
+
+let yourMainProperty = new MainProperty(
+    'images/italian-property.jpg', 
+    'Italian House',
+    [{
+        name: 'Olive',
+        stars: 5,
+        loyaltyUser: LoyaltyUser.GOLD_USER,
+        date: '12-04-2021'
+    }] )
+
+
+const mainImageContainer = document.querySelector(".main-image");
+const image = document.createElement("img");
+image.setAttribute("src", yourMainProperty.src);
+mainImageContainer.appendChild(image);
