@@ -1,13 +1,21 @@
-import { showReviewTotal, populateUser } from "./utils";
+import { showReviewTotal, populateUser, showDetails, getTopTwoReviews} from "./utils";
 import { Permissions, LoyaltyUser } from "./enums";
-import { Price, Country } from './types'
+import { Price, Country } from "./types";
 const propertyContainer = document.querySelector(".properties");
+const reviewContainer = document.querySelector(".reviews");
+const container = document.querySelector(".container");
+const button = document.querySelector("button");
 const footer = document.querySelector(".footer");
 
 let isLoggedIn: boolean;
 
 //Reviews list
-const reviews: any[] = [
+const reviews: {
+  name: string;
+  stars: number;
+  loyaltyUser: LoyaltyUser;
+  date: string;
+}[] = [
   {
     name: "Sheia",
     stars: 5,
@@ -37,8 +45,6 @@ const you = {
   age: 35,
   stayedAt: ["florida-home", "oman-flat", "tokyo-bungalow"],
 };
-
-
 
 //Properties
 const properties: {
@@ -99,23 +105,9 @@ const properties: {
 showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser);
 populateUser(you.isReturning, you.firstName);
 
-//Function that
-let authorityStatus : any
-
-isLoggedIn = true
-
-function showDetails(authorityStatus: boolean | Permissions, element : HTMLDivElement, price: number) {
-   if (authorityStatus) {
-       const priceDisplay = document.createElement('div')
-       priceDisplay.innerHTML = price.toString() + '/night'
-       element.appendChild(priceDisplay)
-   }
-}
 
 
-
-
-
+//Functions
 
 //Displaying the properties on the page inside the div
 for (let i = 0; i < properties.length; i++) {
@@ -126,7 +118,7 @@ for (let i = 0; i < properties.length; i++) {
   image.setAttribute("src", properties[i].image);
   card.appendChild(image);
   propertyContainer.appendChild(card);
-  showDetails(you.permissions, card, properties[i].price)
+  showDetails(you.permissions, card, properties[i].price);
 }
 
 //Adding the current time, and the current temperatur of the location to the footer
@@ -139,3 +131,27 @@ footer.innerHTML =
   " " +
   currentLocation[2] +
   "°";
+
+
+  //Broken code from Function type Practice Challenge
+let count = 0
+function addReviews(array: {
+    name: string;
+    stars: number;
+    loyaltyUser: LoyaltyUser;
+    date: string;
+}[] ) : void {
+    if (!count ) {
+        count++
+        const topTwo = getTopTwoReviews(array)
+        for (let i = 0; i < topTwo.length; i++) {
+            const card = document.createElement('div')
+            card.classList.add('review-card')
+            card.innerHTML = topTwo[i].stars + ' stars from ' + topTwo[i].name
+            reviewContainer.appendChild(card)
+        }
+        container.removeChild(button) 
+    }
+}
+
+button.addEventListener('click', () => addReviews(reviews))

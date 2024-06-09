@@ -4,15 +4,14 @@ const reviewTotalDisplay = document.querySelector("#reviews");
 import { LoyaltyUser } from "./enums";
 
 //function to show total number of reviews and only accepts numbers
-function showReviewTotal(
+export function showReviewTotal(
   value: number,
   reviewer: string,
-  isLoyalty: LoyaltyUser
-) {
+  isLoyalty: LoyaltyUser) {
   const iconDisplay = LoyaltyUser.GOLD_USER ? "⭐" : "";
   reviewTotalDisplay.innerHTML =
     value.toString() +
-    " Review" +
+    "Review" +
     makeMultiple(value) +
     "| last reviewed by " +
     reviewer +
@@ -20,7 +19,7 @@ function showReviewTotal(
     iconDisplay;
 }
 
-function populateUser(isReturning: boolean, userName: string) {
+export function populateUser(isReturning: boolean, userName: string) {
   if (isReturning) {
     returningUserDisplay.innerHTML = "back";
   }
@@ -44,4 +43,20 @@ export function makeMultiple(value: number): string {
   if (value > 1 || value == 0) {
     return "s";
   } else return "";
+}
+
+// Other Broken code from Function Type practice
+export function getTopTwoReviews(reviews: {
+    name: string;
+    stars: number;
+    loyalyuser: LoyaltyUser;
+    date: string;
+}[]) : {
+    name: string;
+    stars: number;
+    loyalyuser: LoyaltyUser;
+    date: string;  
+}[]  {
+ const sortedReviews = reviews.sort((a, b) => b.stars - a.stars)
+ return sortedReviews.slice(0,2)
 }
