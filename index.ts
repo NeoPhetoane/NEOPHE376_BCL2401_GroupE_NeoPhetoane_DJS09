@@ -5,8 +5,7 @@ import {
   getTopTwoReviews,
 } from "./utils";
 import { Permissions, LoyaltyUser } from "./enums";
-import { Price, Country } from "./types";
-import { Review } from "./interfaces";
+import { Review, Property } from "./interfaces";
 const propertyContainer = document.querySelector(".properties");
 const reviewContainer = document.querySelector(".reviews");
 const container = document.querySelector(".container");
@@ -52,20 +51,7 @@ const you = {
   stayedAt: ["florida-home", "oman-flat", "tokyo-bungalow"],
 };
 
-//Interface Property
-interface Property {
-  image: string;
-  title: string;
-  price: Price;
-  location: {
-    firstLine: string;
-    city: string;
-    code: number | string;
-    country: Country;
-  };
-  contact: [number, string];
-  isAvailable: boolean;
-}
+
 
 //Properties
 
