@@ -2,12 +2,14 @@ const returningUserDisplay = document.querySelector("#returning-user");
 const userNameDisplay = document.querySelector("#user");
 const reviewTotalDisplay = document.querySelector("#reviews");
 import { LoyaltyUser } from "./enums";
+import { Review } from "./interfaces";
 
 //function to show total number of reviews and only accepts numbers
 export function showReviewTotal(
   value: number,
   reviewer: string,
-  isLoyalty: LoyaltyUser) {
+  isLoyalty: LoyaltyUser
+) {
   const iconDisplay = LoyaltyUser.GOLD_USER ? "⭐" : "";
   reviewTotalDisplay.innerHTML =
     value.toString() +
@@ -46,17 +48,7 @@ export function makeMultiple(value: number): string {
 }
 
 // Other Broken code from Function Type practice
-export function getTopTwoReviews(reviews: {
-    name: string;
-    stars: number;
-    loyalyuser: LoyaltyUser;
-    date: string;
-}[]) : {
-    name: string;
-    stars: number;
-    loyalyuser: LoyaltyUser;
-    date: string;  
-}[]  {
- const sortedReviews = reviews.sort((a, b) => b.stars - a.stars)
- return sortedReviews.slice(0,2)
+export function getTopTwoReviews(reviews: Review[]) : Review[] {
+  const sortedReviews = reviews.sort((a, b) => b.stars - a.stars);
+  return sortedReviews.slice(0, 2);
 }

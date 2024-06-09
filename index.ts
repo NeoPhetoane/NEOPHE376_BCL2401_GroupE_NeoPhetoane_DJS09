@@ -1,6 +1,7 @@
 import { showReviewTotal, populateUser, showDetails, getTopTwoReviews} from "./utils";
 import { Permissions, LoyaltyUser } from "./enums";
 import { Price, Country } from "./types";
+import { Review } from './interfaces'
 const propertyContainer = document.querySelector(".properties");
 const reviewContainer = document.querySelector(".reviews");
 const container = document.querySelector(".container");
@@ -135,12 +136,7 @@ footer.innerHTML =
 
   //Broken code from Function type Practice Challenge
 let count = 0
-function addReviews(array: {
-    name: string;
-    stars: number;
-    loyaltyUser: LoyaltyUser;
-    date: string;
-}[] ) : void {
+function addReviews(array: Review[]): void { //Interface used to remove reppetition of type declaration
     if (!count ) {
         count++
         const topTwo = getTopTwoReviews(array)
