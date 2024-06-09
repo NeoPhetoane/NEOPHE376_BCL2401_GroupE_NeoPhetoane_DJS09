@@ -1,7 +1,12 @@
-import { showReviewTotal, populateUser, showDetails, getTopTwoReviews} from "./utils";
+import {
+  showReviewTotal,
+  populateUser,
+  showDetails,
+  getTopTwoReviews,
+} from "./utils";
 import { Permissions, LoyaltyUser } from "./enums";
 import { Price, Country } from "./types";
-import { Review } from './interfaces'
+import { Review } from "./interfaces";
 const propertyContainer = document.querySelector(".properties");
 const reviewContainer = document.querySelector(".reviews");
 const container = document.querySelector(".container");
@@ -106,8 +111,6 @@ const properties: {
 showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser);
 populateUser(you.isReturning, you.firstName);
 
-
-
 //Functions
 
 //Displaying the properties on the page inside the div
@@ -133,21 +136,35 @@ footer.innerHTML =
   currentLocation[2] +
   "°";
 
-
-  //Broken code from Function type Practice Challenge
-let count = 0
-function addReviews(array: Review[]): void { //Interface used to remove reppetition of type declaration
-    if (!count ) {
-        count++
-        const topTwo = getTopTwoReviews(array)
-        for (let i = 0; i < topTwo.length; i++) {
-            const card = document.createElement('div')
-            card.classList.add('review-card')
-            card.innerHTML = topTwo[i].stars + ' stars from ' + topTwo[i].name
-            reviewContainer.appendChild(card)
-        }
-        container.removeChild(button) 
+//Broken code from Function type Practice Challenge
+let count = 0;
+function addReviews(array: Review[]): void {
+  //Interface used to remove reppetition of type declaration
+  if (!count) {
+    count++;
+    const topTwo = getTopTwoReviews(array);
+    for (let i = 0; i < topTwo.length; i++) {
+      const card = document.createElement("div");
+      card.classList.add("review-card");
+      card.innerHTML = topTwo[i].stars + " stars from " + topTwo[i].name;
+      reviewContainer.appendChild(card);
     }
+    container.removeChild(button);
+  }
 }
 
-button.addEventListener('click', () => addReviews(reviews))
+button.addEventListener("click", () => addReviews(reviews));
+
+
+//Class practice
+
+class MainProperty {
+    src: string
+    title: string
+    reviews: Review[]
+    constructor(src, title, reviews) {
+        this.src = src
+        this.title = title
+        this.reviews = reviews
+    }
+}
