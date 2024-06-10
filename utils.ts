@@ -1,7 +1,7 @@
-const returningUserDisplay = document.querySelector("#returning-user");
-const userNameDisplay = document.querySelector("#user");
-const reviewTotalDisplay = document.querySelector("#reviews");
-import { LoyaltyUser } from "./enums";
+const returningUserDisplay = document.querySelector("#returning-user") as HTMLElement;
+const userNameDisplay = document.querySelector("#user") as HTMLElement;
+const reviewTotalDisplay = document.querySelector("#reviews") as HTMLElement;
+import { LoyaltyUser, Permissions } from "./enums";
 import { Review } from "./interfaces";
 
 //function to show total number of reviews and only accepts numbers

@@ -1,5 +1,9 @@
+const path = require('path')
 module.exports = {
-  "output": {
+
+  "mode": "development",
+"devtool": "inline-source-map",
+"output": {
     "filename": "[name].pack.js"
   },
   "entry": {
